@@ -40,14 +40,14 @@ const createAndSavePerson = done => {
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  const persons = Person.create(arrayOfPeople);
-  persons.save(function (error, data) {
+  Person.create(arrayOfPeople, function (error, data) {
     if (error) {
       done(error);
     } else {
       done(null, data);
     }
   });
+  // persons.save();
 };
 
 const findPeopleByName = (personName, done) => {
@@ -93,7 +93,7 @@ const queryChain = done => {
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
  */
-
+Person.watch().on('change', data => console.log(new Date(), data));
 //----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
 
 exports.PersonModel = Person;
